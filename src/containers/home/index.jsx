@@ -7,9 +7,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { validWeatherConditions } from "../../constants";
 
 const HomeContainer = () => {
-  const imageCondition =
-    useSelector((state) => state?.weather?.weatherData?.weather[0]?.main) ??
-    "Atmosphere";
+  const imageCondition = useSelector(
+    (state) => state?.weather?.weatherData?.weather[0]?.main
+  );
 
   const image = validWeatherConditions.includes(imageCondition)
     ? imageCondition
