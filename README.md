@@ -1,70 +1,59 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Weather Tracking System - Frontend
 
-## Available Scripts
+## Overview
+This is the frontend of a weather tracking system that provides real-time weather data for various cities. Users can search for weather conditions based on city names or geographical coordinates (latitude and longitude). The application fetches data from a backend API and displays weather information along with alerts based on predefined temperature thresholds.
 
-In the project directory, you can run:
+## Features
+- **Search for Weather by City:** Users can input a city name to fetch its current weather conditions.
+- **Location-Based Weather:** Users can retrieve weather data based on their geographical coordinates.
+- **Real-Time Data Updates:** Weather data is updated regularly to provide users with the latest information.
+- **Temperature Alerts:** The system checks for temperature alerts and sends notifications if the temperature exceeds predefined thresholds.
+- **User-Friendly UI:** The frontend is designed for ease of use and provides a responsive experience across devices.
+- **Redux for State Management:** The application uses Redux to manage state efficiently across components.
 
-### `npm start`
+## Technologies Used
+- **React:** For building the user interface.
+- **Redux:** For state management across the application.
+- **Axios:** For making API requests to the backend.
+- **React Toastify:** For displaying notifications to the user.
+- **React Loading Skeleton:** For loading placeholders while data is being fetched.
+- **Responsive Design:** The UI is fully responsive, ensuring a seamless experience on both desktop and mobile devices.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Installation
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. Clone the repository:
+   ```bash
+   git clone <YOUR_FRONTEND_REPOSITORY_URL>
+   cd <YOUR_FRONTEND_DIRECTORY>
+   ```
 
-### `npm test`
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. Start the application:
+   ```bash
+   npm start
+   ```
 
-### `npm run build`
+4. Open your browser and navigate to `http://localhost:3000`.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## API Integration
+The frontend interacts with a backend API that provides weather data. The API can be accessed through the following endpoints:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Fetch Weather by City:**
+  - URL: `http://localhost:5000/api/weather?city=<CITY_NAME>`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Fetch Weather by Coordinates:**
+  - URL: `http://localhost:5000/api/weather?lat=<LATITUDE>&lon=<LONGITUDE>`
 
-### `npm run eject`
+## How to Use
+1. Upon loading the application, the user will see a search bar to enter a city name.
+2. Enter the city name and press Enter or click the search button to retrieve the weather data.
+3. To use location-based weather, the user can enable location services, and the app will fetch the weather based on the current geographical coordinates.
+4. The application will display the current temperature, weather conditions, and any alerts if the temperature exceeds the threshold.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Contributing
+Contributions are welcome! If you have suggestions for improvements or new features, please open an issue or submit a pull request.
