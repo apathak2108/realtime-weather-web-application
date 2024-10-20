@@ -1,7 +1,14 @@
 import React from "react";
+import HomeContainer from "./containers/home";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
-  return <div className="App"></div>;
+  return (
+    <>
+      <HomeContainer />
+      <ToastContainer />
+    </>
+  );
 };
 
 export default App;
