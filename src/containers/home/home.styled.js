@@ -5,7 +5,7 @@ export const StyledHomeContainer = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-image: ${({ backgroundImage }) => `url(${backgroundImage})`};
+  background-image: ${({ backgroundimage }) => `url(${backgroundimage})`};
   background-size: cover;
   background-position: center;
   font-family: sans-serif;

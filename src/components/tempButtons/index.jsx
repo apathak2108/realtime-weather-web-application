@@ -1,21 +1,27 @@
-import { useState } from "react";
 import { ButtonContainer, TemperatureButton } from "./tempButtons.styled";
+import { useDispatch, useSelector } from "react-redux";
+import { setActiveUnit } from "../../redux/actions";
 
 const TemperatureConversionButtons = () => {
-  const [activeUnit, setActiveUnit] = useState("C");
+  const dispatch = useDispatch();
+  const activeUnit = useSelector((state) => state?.weather?.activeUnit);
+
+  const handleSetActiveUnit = (unit) => {
+    dispatch(setActiveUnit(unit));
+  };
 
   return (
     <ButtonContainer>
       <TemperatureButton
         className={activeUnit === "C" ? "active" : ""}
-        onClick={() => setActiveUnit("C")}
+        onClick={() => handleSetActiveUnit("C")}
       >
         °C
       </TemperatureButton>
       <span>|</span>
       <TemperatureButton
         className={activeUnit === "K" ? "active" : ""}
-        onClick={() => setActiveUnit("K")}
+        onClick={() => handleSetActiveUnit("K")}
       >
         °K
       </TemperatureButton>
