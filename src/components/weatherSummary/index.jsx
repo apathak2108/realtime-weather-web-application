@@ -29,7 +29,8 @@ const WeatherSummary = () => {
   };
 
   const handleSetButtonClick = () => {
-    dispatch(setThresholdTemperature(weatherData.name, threshold));
+    const thresholdTemp = +threshold + 273;
+    dispatch(setThresholdTemperature(weatherData.name, thresholdTemp));
     setThreshold("");
   };
 

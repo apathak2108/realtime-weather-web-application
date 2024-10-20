@@ -3,12 +3,9 @@ import {
   FETCH_ALERTS_FAILURE,
   FETCH_ALERTS_REQUEST,
   FETCH_ALERTS_SUCCESS,
-  FETCH_WEATHER_DIRECTLY_ERROR,
-  FETCH_WEATHER_DIRECTLY_REQUEST,
-  FETCH_WEATHER_DIRECTLY_SUCCESS,
-  FETCH_WEATHER_FROM_BACKEND_ERROR,
-  FETCH_WEATHER_FROM_BACKEND_REQUEST,
-  FETCH_WEATHER_FROM_BACKEND_SUCCESS,
+  FETCH_WEATHER_REQUEST,
+  FETCH_WEATHER_SUCCESS,
+  FETCH_WEATHER_FAILURE,
   SET_ACTIVE_UNIT,
   SET_THRESHOLD_FAILURE,
   SET_THRESHOLD_REQUEST,
@@ -21,57 +18,34 @@ export const setActiveUnit = (unit) => ({
   payload: unit,
 });
 
-export const fetchWeatherFromBackend = () => {
-  return async (dispatch) => {
-    dispatch({
-      type: FETCH_WEATHER_FROM_BACKEND_REQUEST,
-    });
-    try {
-      const response = await axios.get("/api/weather/latest");
-      dispatch({
-        type: FETCH_WEATHER_FROM_BACKEND_SUCCESS,
-        payload: response.data,
-      });
-    } catch (error) {
-      dispatch({
-        type: FETCH_WEATHER_FROM_BACKEND_ERROR,
-        payload: error,
-      });
-    }
-  };
-};
+export const fetchWeather = (query) => async (dispatch) => {
+  try {
+    dispatch({ type: FETCH_WEATHER_REQUEST });
 
-export const fetchWeatherDirectly = (city, location = null) => {
-  return async (dispatch) => {
-    dispatch({
-      type: FETCH_WEATHER_DIRECTLY_REQUEST,
-    });
-    try {
-      let response;
-      const API_KEY = process.env.REACT_APP_OPENWEATHERMAP_API_KEY;
-
-      if (location) {
-        const { lat, lon } = location;
-        response = await axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`
-        );
-      } else if (city) {
-        response = await axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`
-        );
-      }
-      dispatch({
-        type: FETCH_WEATHER_DIRECTLY_SUCCESS,
-        payload: response.data,
-      });
-    } catch (error) {
-      toast.error("City not found");
-      dispatch({
-        type: FETCH_WEATHER_DIRECTLY_ERROR,
-        payload: error.message || "Error fetching weather data",
-      });
+    let url = "";
+    if (query.city) {
+      url = `http://localhost:5000/api/weather?city=${query.city}`;
+    } else if (query.lat && query.lon) {
+      url = `http://localhost:5000/api/weather?lat=${query.lat}&lon=${query.lon}`;
+    } else {
+      throw new Error("Invalid query. Please provide a city or coordinates.");
     }
-  };
+
+    const response = await axios.get(url);
+    const data = response.data;
+
+    dispatch({
+      type: FETCH_WEATHER_SUCCESS,
+      payload: data,
+    });
+    toast.success(`Showing weather of ${data?.name}`);
+  } catch (error) {
+    dispatch({
+      type: FETCH_WEATHER_FAILURE,
+      payload: error.response?.data?.message || error.message,
+    });
+    toast.error("Something went wrong");
+  }
 };
 
 export const fetchAlerts = (city) => async (dispatch) => {
@@ -106,7 +80,7 @@ export const setThresholdTemperature =
         }
       );
       toast.success(
-        `Threshold temperature ${temperatureThreshold} set for ${city}`
+        `Threshold temperature ${temperatureThreshold}°K set for ${city}`
       );
       dispatch({
         type: SET_THRESHOLD_SUCCESS,

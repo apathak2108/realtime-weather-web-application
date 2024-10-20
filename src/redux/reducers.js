@@ -1,10 +1,4 @@
 import {
-  FETCH_WEATHER_FROM_BACKEND_REQUEST,
-  FETCH_WEATHER_FROM_BACKEND_SUCCESS,
-  FETCH_WEATHER_FROM_BACKEND_ERROR,
-  FETCH_WEATHER_DIRECTLY_REQUEST,
-  FETCH_WEATHER_DIRECTLY_SUCCESS,
-  FETCH_WEATHER_DIRECTLY_ERROR,
   SET_ACTIVE_UNIT,
   FETCH_ALERTS_REQUEST,
   FETCH_ALERTS_SUCCESS,
@@ -12,6 +6,9 @@ import {
   SET_THRESHOLD_REQUEST,
   SET_THRESHOLD_SUCCESS,
   SET_THRESHOLD_FAILURE,
+  FETCH_WEATHER_REQUEST,
+  FETCH_WEATHER_SUCCESS,
+  FETCH_WEATHER_FAILURE,
 } from "./actionTypes";
 
 const initialState = {
@@ -33,23 +30,20 @@ const weatherReducer = (state = initialState, action) => {
         ...state,
         activeUnit: action.payload,
       };
-    case FETCH_WEATHER_FROM_BACKEND_REQUEST:
-    case FETCH_WEATHER_DIRECTLY_REQUEST:
+    case FETCH_WEATHER_REQUEST:
       return {
         ...state,
         loading: true,
         error: null,
       };
-    case FETCH_WEATHER_FROM_BACKEND_SUCCESS:
-    case FETCH_WEATHER_DIRECTLY_SUCCESS:
+    case FETCH_WEATHER_SUCCESS:
       return {
         ...state,
         loading: false,
         weatherData: action.payload,
         error: null,
       };
-    case FETCH_WEATHER_FROM_BACKEND_ERROR:
-    case FETCH_WEATHER_DIRECTLY_ERROR:
+    case FETCH_WEATHER_FAILURE:
       return {
         ...state,
         loading: false,
